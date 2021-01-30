@@ -1,0 +1,108 @@
+<div id="playGame"  style="display:inline-block; text-align: center; width: 100%">
+    <div>
+        <form method="POST" action="/lobby">
+            <fieldset>
+                <legend>Game Selection</legend>
+                <label for="gamemode">Game Mode:</label>
+                <select name="gamemode" id="gameModeSelection" required>
+                    <option value="ranked">Ranked</option>
+                    <option value="casual">Casual</option>
+                </select>
+                <br>
+                <input type="submit" value="Find Game!">
+                <br>
+                <div style="text-align: left">
+                    <label for="rankedInfo"><b>Ranked:</b></label>
+                    <ul name="rankedInfo" style="list-style-position: inside">
+                        <li>Will affect your W/L</li>
+                        <li>Will be spectatable by anyone</li>
+                        <li>Will be put on your Past Ten Games list</li>
+                        <li>Will be visible in your Current Games list</li>
+                    </ul>
+
+                    <label for="casualInfo"><b>Casual:</b></label>
+                    <ul name="casualInfo" style="list-style-position: inside">
+                        <li>Will NOT affect your W/L</li>
+                        <li>Will be spectatable by anyone</li>
+                        <li>Will be visible in your Current Games list</li>
+                    </ul>
+
+                    <label for="friendInfo"><b>Friends (see friendslist):</b></label>
+                    <ul name="friendInfo" style="list-style-position: inside">
+                        <li>Will NOT affect your W/L</li>
+                        <li>Will be spectatable by friends only</li>
+                        <li>Will NOT be visible in your Current Games list</li>
+                        <li>Share the game code so that friends can view it</li>
+                    </ul>
+                </div>
+                <br>
+            </fieldset>
+        </form>
+    </div><br>
+    {{#if message.length}}
+        <div style="text-align: center; border: 0.1rem solid grey; background-color: rgba(255,255,255,0.3)">
+            <p style="text-shadow: 1px 1px white"><b>{{message}}</b></p>
+        </div>
+        <br>
+    {{/if}}
+
+    <div>
+        <form method="post" action="/play/">
+            <fieldset>
+                <legend>Spectate A Live Game:</legend>
+                <label for="gameID">Game Mode:</label>
+                <input type="text" name="gameID" placeholder="Enter Game ID">
+                <input type="submit" value="Spectate">
+            </fieldset>
+        </form>
+        <br>
+        <form method="post" action="/view/">
+            <fieldset>
+                <legend>Watch An Completed Game:</legend>
+                <label for="gameID">Game Mode:</label>
+                <input type="text" name="gameID" placeholder="Enter Game ID">
+                <input type="submit" value="Spectate">
+            </fieldset>
+        </form>
+    </div><br>
+
+    <div class="wrapper">
+        <h1 style="font-size: 20px;">Game Invites:</h1>
+        <ul id='friendsList' style="flex: 1">
+            {{#if pendingGames.length}}
+                {{#each pendingGames}}
+                    <div class="friend gameInvite" style="color: #ae5959; margin: 10px; display: inline-block">
+                        <img src="/imgs/findOpponent.png" style="float:left">
+                        <div class="name">{{this.player1}} vs {{this.player2}}</div>
+                        <div class="buttons" style="float:right">
+                            <img class="accept" src="/imgs/findOpponent.png" onclick="acceptChallenge(`{{this._id}}`, `{{../currentUserPlayer.name}}`)">
+                            <a href="/denyGameInvite/{{this._id}}"><img class="deny" src="/imgs/no.png"></a>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <p>None</p>
+            {{/if}}
+        </ul>
+    </div>
+</div>
+
+<script>
+    const socket = io();
+    function show(x){
+        let gMenu = document.getElementById(x);
+        if (gMenu.style.display === 'block' || gMenu.style.display === 'flex') {
+            gMenu.style.display = "none";
+        } else {
+            gMenu.style.display = "block";
+        }
+    }
+
+    function acceptChallenge(id, name) {
+        if(confirm('Are you sure you\'re up for the challenge?')) $.post('/api/user/acceptChallenge', {name: name, gameID: id});
+        socket.emit('accept-game', id);
+        socket.on('game-ready', () => {
+            window.location.replace('http://localhost:9999/play/' + id);
+        });
+    }
+</script>

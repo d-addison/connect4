@@ -1,0 +1,36 @@
+<div id="loginPageParent" class="boxWrapperParent">
+    <div id="loginPageChild" class="boxWrapperChild">
+        <div id="signIn">
+            <h><u>SIGN IN</u></h>
+
+            <form class="signInField" action="/api/user/login" method="post">
+                <p>To an existing account</p>
+                <label for="username">ConnecFTW account name</label><br>
+                <input type="text" id="username" name="name"><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password"><br>
+
+                {{#if message.length}}
+                    <br>
+                    <p style="font-size: 15px; font-weight: bolder; background-color: red;border: 0.1rem solid grey; color: white; max-width: 300px">{{message}}</p>
+                {{/if}}
+
+                <input type="submit" value="Sign in" class="submit">
+            </form>
+        </div>
+
+        <div id="vertLine">
+
+        </div>
+
+        <div id="create">
+            <h><u>CREATE</u></h>
+            <div id="createText">
+                <p>Create your free account now!<br><br>It's free to join and easy to get right into the action.<br>
+                    <br>Continue on to create your free account and start winning.</p>
+            </div>
+            <a href="join"><button class="submit">Join ConnecFTW</button></a>
+        </div>
+    </div>
+</div>
+<a href="resetPassword" id="forgotPassword">Forgot your password?</a>

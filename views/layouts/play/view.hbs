@@ -1,0 +1,283 @@
+<div id="game">
+    <div id = messagingParent>
+        <div id="messagingChild">
+            <h id="roomName"></h>
+            <h id="userList"></h>
+            <div id="messaging" class="msg"></div>
+            <form id="sendContainer">
+                <input type="text" id="messageInput" placeholder="Enter message" required autocapitalize="on" autocomplete="off">
+                <button type="submit" id="sendButton">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="boardWrapper">
+        <div id="textAboveBoard">
+            {{#if game.active}}<div id="whosTurn" style="color: {{whatColour game.whosTurn currentUserPlayer.name game.player1 game.player2 currentUserPlayer.mColour currentUserPlayer.oColour}}">{{whosTurn game.whosTurn currentUserPlayer.name}} turn!</div>
+            {{else}}<div id="whosTurn" style="color: {{whatColour game.winner currentUserPlayer.name game.player1 game.player2 currentUserPlayer.mColour currentUserPlayer.oColour}}">{{game.winner}} is the winner!</div>{{/if}}
+        </div>
+
+        <div id="board">
+            <!-- Row 1 --->
+            <div class="row">
+                <div class="cell" id="cell00" onclick="placePiece(0, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell01" onclick="placePiece(0, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell02" onclick="placePiece(0, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell03" onclick="placePiece(0, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell04" onclick="placePiece(0, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell05" onclick="placePiece(0, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell06" onclick="placePiece(0, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[0].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+            <!-- Row 2 --->
+            <div class="row">
+                <div class="cell" id="cell10" onclick="placePiece(1, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell11" onclick="placePiece(1, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell12" onclick="placePiece(1, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell13" onclick="placePiece(1, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell14" onclick="placePiece(1, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell15" onclick="placePiece(1, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell16" onclick="placePiece(1, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[1].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+            <!-- Row 3 --->
+            <div class="row">
+                <div class="cell" id="cell20" onclick="placePiece(2, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell21" onclick="placePiece(2, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell22" onclick="placePiece(2, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell23" onclick="placePiece(2, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell24" onclick="placePiece(2, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell25" onclick="placePiece(2, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell26" onclick="placePiece(2, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[2].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+            <!-- Row 4 --->
+            <div class="row">
+                <div class="cell" id="cell30" onclick="placePiece(3, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell31" onclick="placePiece(3, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell32" onclick="placePiece(3, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell33" onclick="placePiece(3, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell34" onclick="placePiece(3, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell35" onclick="placePiece(3, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell36" onclick="placePiece(3, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[3].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+            <!-- Row 5 --->
+            <div class="row">
+                <div class="cell" id="cell40" onclick="placePiece(4, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell41" onclick="placePiece(4, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell42" onclick="placePiece(4, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell43" onclick="placePiece(4, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell44" onclick="placePiece(4, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell45" onclick="placePiece(4, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell46" onclick="placePiece(4, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[4].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+            <!-- Row 6 --->
+            <div class="row">
+                <div class="cell" id="cell50" onclick="placePiece(5, 0)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[0] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell51" onclick="placePiece(5, 1)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[1] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell52" onclick="placePiece(5, 2)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[2] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell53" onclick="placePiece(5, 3)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[3] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell54" onclick="placePiece(5, 4)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[4] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell55" onclick="placePiece(5, 5)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[5] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+                <div class="cell" id="cell56" onclick="placePiece(5, 6)" style="background-color: {{whichColor game.player1 game.player2 currentUserPlayer.name game.board.[5].[6] currentUserPlayer.mColour currentUserPlayer.oColour}}"></div>
+            </div>
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="500" value="100" class="slider" id="myRange">
+        </div>
+        <p style="float:left">0s</p>
+        <button onclick="replay()" style="font-size: 25px" id="replayButton">Replay Game</button>
+        <p style="float:right">5s</p>
+    </div>
+</div>
+
+<script>
+    const socket = io();
+    const user = `{{currentUserPlayer.name}}`;
+    const room = `{{gameID}}`;
+    const mColour = `{{currentUserPlayer.mColour}}`;
+    const oColour = `{{currentUserPlayer.oColour}}`;
+    const player1 = `{{game.player1}}`;
+    const player2 = `{{game.player2}}`;
+    let gameType = `{{game.lobbyType}}`;
+    let otherPlayer;
+    if(player1 === user) {
+        otherPlayer = player2;
+    } else {
+        otherPlayer = player1;
+    }
+
+    const chatForm = document.getElementById('sendContainer');
+    const chatMessages = document.querySelector('.msg');
+    const roomName = document.getElementById('roomName');
+    const userListChat = document.getElementById('users');
+    socket.emit('join-room', room, user);
+    outputRoomName(room);
+    socket.emit('get-messages', room, true);
+    socket.on('recieve-messages', messages => {
+        messages.forEach(message => {
+            outputMessage(message);
+        });
+    });
+
+    // msg from server
+    socket.on('message', message => {
+        outputMessage(message);
+
+        // scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+
+    // output message to DOM
+    function outputMessage(message) {
+        const div = document.createElement('div');
+        div.classList.add('msg');
+        div.innerHTML = `<b>${message.name} (${message.time})</b><br>${message.message}`;
+        if(message.name === "ConnecBot") {
+            div.style.backgroundColor = "lightred"
+        } else if (message.name === user) {
+            div.style.backgroundColor = mColour;
+        } else if (message.name === "Spectator") {
+            div.style.backgroundColor = "lightgrey";
+        } else {
+            div.style.backgroundColor = oColour;
+        }
+        document.querySelector('#messaging').appendChild(div);
+    }
+
+    // add room name to DOM
+    function outputRoomName(room) {
+        roomName.innerText = gameType.charAt(0).toUpperCase() + gameType.slice(1) +' Lobby #' + room;
+    }
+
+    // get users and room
+    socket.on('room-users', ({room}) => {
+        outputRoomName(room);
+    });
+
+    // add user to DOM
+    function outputUsers(users) {
+        if(users) {
+            userListChat.innerHTML = `${users.map(user => `<li>${user.name}</li>`).join('')}`;
+        }
+    }
+
+    chatForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        // get msg text
+        const msg = e.target.elements.messageInput.value;
+
+        // send msg to server
+        socket.emit('chat-message', msg, user, room);
+
+        // clear input
+        e.target.elements.messageInput.value = '';
+        e.target.elements.messageInput.focus();
+    });
+
+    function show(x){
+        let gMenu = document.getElementById(x);
+        if (gMenu.style.display === 'block' || gMenu.style.display === 'flex') {
+            gMenu.style.display = "none";
+        } else {
+            gMenu.style.display = "block";
+        }
+    }
+
+    function placePiece(x, y) {
+        socket.emit('place-piece', x,y,user, room);
+    }
+
+    socket.on('update-board', (x,y, whoPlacedIt) => {
+        let color;
+        let player;
+        let title = document.getElementById('whosTurn');
+
+        if(user === player1 || user === player2) {
+            if(whoPlacedIt === user) {
+                color = mColour;
+                player = "Your turn!";
+                title.style.color = mColour;
+            } else if(whoPlacedIt === otherPlayer) {
+                color = oColour;
+                player = otherPlayer + "'s turn!";
+                title.style.color = oColour;
+            }
+        } else {
+            if(whoPlacedIt === player1) {
+                color = 'red';
+                player = player1 + "'s turn!";
+                title.style.color = 'red';
+            } else {
+                color = 'black';
+                player = player2 + "'s turn!";
+                title.style.color = 'black';
+            }
+        }
+
+        document.getElementById('cell' + x+y).style.backgroundColor = color;
+        title.innerHTML = player;
+    });
+
+    socket.on('game-over', winner => {
+        let title = document.getElementById('whosTurn');
+        if(winner === user) {
+            title.innerHTML = "You are the winner!";
+            title.style.color = mColour;
+        } else {
+            title.innerHTML = winner + " is the winner!";
+            title.style.color = oColour;
+        }
+        let board = document.getElementById('board');
+        board.style.backgroundColor = "#60b5b2";
+        document.getElementById('replayButton').style.display = "inline-block";
+    });
+
+    socket.on('highlight-winner', (winner, pieces) => {
+        if(winner !== 'ConnecBot') {
+            highlightWinners(pieces);
+        }
+    });
+
+    function highlightWinners(arr) {
+        let x1 = arr[0];
+        let y1 = arr[1];
+        let x2 = arr[2];
+        let y2 = arr[3];
+        let x3 = arr[4];
+        let y3 = arr[5];
+        let x4 = arr[6];
+        let y4 = arr[7];
+        let cell1 = document.getElementById("cell"+parseInt(x1, 10)+parseInt(y1, 10));
+        let cell2 = document.getElementById("cell"+parseInt(x2, 10)+parseInt(y2, 10));
+        let cell3 = document.getElementById("cell"+parseInt(x3, 10)+parseInt(y3, 10));
+        let cell4 = document.getElementById("cell"+parseInt(x4, 10)+parseInt(y4, 10));
+
+        cell1.style.boxShadow = "0px 0px 3px 7px white";
+        cell2.style.boxShadow = "0px 0px 3px 7px white";
+        cell3.style.boxShadow = "0px 0px 3px 7px white";
+        cell4.style.boxShadow = "0px 0px 3px 7px white";
+    }
+    async function replay() {
+        document.getElementById('replayButton').style.display = "none";
+        document.getElementById('board').style.backgroundColor= '#75e5e1';
+        let cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => {
+            cell.style.backgroundColor = 'white';
+            cell.style.boxShadow = 'none';
+        });
+
+        socket.emit('retrieve-gameboard', room);
+        let moveNumber = 0;
+        socket.on('recieve-gameboard', async(board) => {
+            for(let move of board.moves) {
+                await sleep(document.getElementById('myRange').value * 10);
+                socket.emit('place-piece-fake', move[0],move[1], move[2], room, moveNumber);
+                moveNumber += 1;
+            }
+            socket.emit('finished', room);
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>

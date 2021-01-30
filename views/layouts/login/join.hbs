@@ -1,0 +1,22 @@
+<div id="loginPageParent" class="boxWrapperParent">
+    <div id="loginPageChild" class="boxWrapperChild">
+        <div id="join">
+            <h>CREATE YOUR ACCOUNT</h>
+            <form class="signInField" method="post" action="/api/user/register">
+                <label for="username">Email</label><br>
+                <input type="text" id="email" name="email"><br>
+                <label for="username">Desired Username</label><br>
+                <input type="text" id="username" name="name"><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password"><br>
+
+                {{#if message.length}}
+                    <br>
+                    <p style="font-size: 15px; font-weight: bolder; background-color: red;border: 0.1rem solid grey; color: white; max-width: 300px">{{message}}</p>
+                {{/if}}
+
+                <input type="submit" value="Create Account" class="submit">
+            </form>
+        </div>
+    </div>
+</div>

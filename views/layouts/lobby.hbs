@@ -1,0 +1,43 @@
+<script>
+    const socket = io();
+    const user = `{{username}}`;
+    const gameType = `{{gameType}}`;
+    socket.emit('join-lobby', user);
+    socket.emit('searching', gameType, user);
+    socket.on('game-found', function(gameID) {
+        socket.emit('activate-game', gameID, user);
+        socket.on('game-ready', () => {
+            window.location.replace('http://localhost:9999/play/' + gameID);
+        });
+    });
+
+    function leaveQueue() {
+        if(confirm("Are you sure you want to leave the search?")) socket.emit('leave-queue', user);
+    }
+
+    let time = 0;
+    setInterval(upTime, 1000);
+
+    function upTime() {
+        time += 1;
+        if(time >= 300) {
+            socket.emit('leave-queue');
+            window.location.replace('/');
+            confirm("Search timed out after 5 minutes... Try a different gamemode / privacy setting");
+        }
+        document.getElementById("time").innerHTML = new Date(time * 1000).toISOString().substr(11,8);
+    }
+
+</script>
+
+<div style="display:flex; text-align: center;font-size:40px; content-align: center; justify-content: center;">
+    <div>
+        <p style="margin-top:20px">Searching for a game...</p>
+        <p id="time">00:00:00</p>
+        <form method="get" action="/">
+            <input type="submit" onclick="leaveQueue()" value="Cancel Search">
+        </form>
+        <br>
+        <img src="/imgs/searching.gif" width="200px" height="200px" style="mix-blend-mode: multiply">
+    </div>
+</div>

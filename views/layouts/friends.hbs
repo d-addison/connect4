@@ -1,0 +1,72 @@
+<div id="friendsPageParent" class="boxWrapperParent">
+    <div id="friendsPageChild" class="boxWrapperChild">
+        <form method="get" action="/friends/users/">
+            <input type="text" name="user" id="addFriendField" placeholder="Enter a username:">
+            <input type="submit" value="Search!" id="addFriendButton">
+        </form>
+        {{#if searching}}
+            <div class="wrapper">
+                <h1 style="font-size: 20px;">Search Results:</h1>
+                {{#if message.length}}<p>{{message}}</p>{{/if}}
+                <ul id='searchList'>
+                    {{#each search}}
+                        <div class="friend {{this.status}}" style="color: {{this.mColour}}; margin: 10px;{{#if (checkPrivacy this.profileType)}}background-color: lightgrey;{{/if}}" id="{{this.name}}">
+                            <img src="{{this.profilePic}}">
+                            <div class="name">{{this.name}}
+                                <div class="name" id="insert2" style="font-size: 17px; text-align: left">W/L: {{divideAndRound this.wins this.losses}}</div>
+                            </div>
+                            <div class="buttons">
+                                <a href="/profile/{{this.name}}"><img class="profile" src="/imgs/profile.png"></a>
+                                {{#if (checkStatus this.name ../userFL)}}{{else}}
+                                    <img class="add" id="{{this.name}}" src="/imgs/addUser.png">
+                                {{/if}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </ul>
+            </div>
+        {{else}}
+        <div class="wrapper">
+            <h1 style="font-size: 20px;">Friends:</h1>
+            <ul id='friendsList' style="flex: 1">
+                {{#if message.length}}{{message}}{{/if}}
+                {{#each friends}}
+                    <div class="friend {{this.status}}" style="color: {{this.mColour}}; margin: 10px" id="{{this.name}}">
+                        <img src="{{this.profilePic}}">
+                        <div class="name">{{this.name}}
+                            <div class="name" id="insert1" style="font-size: 17px; text-align: left">W/L: {{divideAndRound this.wins this.losses}}</div>
+
+                        </div>
+                        <div class="buttons">
+                            <img class="challenge" src="/imgs/findOpponent.png" id="{{this.name}}">
+                            <a href="/profile/{{this.name}}"><img class="profile" src="/imgs/profile.png"></a>
+                            <a href="/chatroom/{{getChatID ../currentUserPlayer this.name}}"><img class="message" src="/imgs/message.png"></a>
+                            <img class="remove" src="/imgs/no.png">
+                        </div>
+                    </div>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="wrapper">
+            <h1 style="font-size: 20px;">Incoming Friend Requests:</h1>
+            <ul id='incomingFriends'>
+                {{#each requests}}
+                    <div class="friend {{this.status}}" style="color: {{this.mColour}}; margin: 10px" id="{{this.name}}">
+                        <img src="{{this.profilePic}}">
+                        <div class="name">{{this.name}}
+                            <div class="name" id="insert2" style="font-size: 17px; text-align: left">W/L: {{divideAndRound this.wins this.losses}}</div>
+                        </div>
+                        <div class="buttons">
+                            <a href="/profile/{{this.name}}"><img class="profile" src="/imgs/profile.png"></a>
+                            <img class="accept" src="/imgs/accept.jpg">
+                            <img class="deny" src="/imgs/no.png">
+                        </div>
+                    </div>
+                {{/each}}
+            </ul>
+        </div>
+
+        {{/if}}
+    </div>
+</div>

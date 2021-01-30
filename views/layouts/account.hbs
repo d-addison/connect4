@@ -1,0 +1,117 @@
+<div id="accountParent" class="boxWrapperParent">
+    <div id="accountChild" class="boxWrapperChild">
+        <div id="profileInfo">
+            <img src="{{profilePic}}" alt="placeholderProfilePic" width="120px" height="120px" id="profilePic" class="pro">
+            <aside width="300px">
+                <p id="name" style="color: {{mColour}}; text-shadow: 0 0 3px black">{{currentUserPlayer.name}}</p>
+                <div style="display: table">
+                    <p id="onlineStatus" style="color: {{colour}};text-shadow: 1px 1px black">{{status}}</p>
+                    <div class="dropdown" onclick="show('dropdown-content')">
+                        <span>
+                            <img id="dropdownPic" src="../imgs/logo.svg" alt="Website Logo" width="15x" style="cursor: pointer">
+                        </span>
+                        <div id="dropdown-content">
+                            <form action="/api/user/changeStatus" method="post" id="statusForm">
+                                <button type="submit" style="color: lightgreen; text-shadow: 1px 1px black" value="online" name="status">Online</button>
+                                <button type="submit" style="color: yellow; text-shadow: 1px 1px black" value="away" name="status">Away</button>
+                                <button type="submit" style="color: grey; text-shadow: 1px 1px black" value="offline" name="status">Offline</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <p style="float:left">W/L: {{divideAndRound currentUserPlayer.wins currentUserPlayer.losses}}</p>
+                <p style="float:left">Wins: {{currentUserPlayer.wins}}</p>
+                <p style="float:left">Losses: {{currentUserPlayer.losses}}</p><br>
+                <a href="/account/profileSettings"><button style="float:left; margin-bottom: 5px">Change Profile Settings</button></a>
+            </aside>
+        </div>
+
+        <div id="gameHistory">
+            <p>Past {{pastGames.length}} Games:</p>
+            <div id="pastTenGames">
+                {{#if pastGames.length}}
+                    {{#each pastGames}}
+                        <div class="hoverableGame" onclick="openGame(`{{this._id}}`)" style="background-color: {{isWinner ../currentUserPlayer.name this.winner}}">
+                            <aside>
+                                <p style="font-size: 20px; float: right; text-align: left">{{this.winner}} won against {{this.loser}}.<br>{{#if this.forfeit}}{{this.loser}} forfeit the match.<br>{{/if}}
+                                    Total moves made: {{this.moves.length}}<br>
+                                    Type of game: {{this.lobbyType}}
+                                </p>
+                            </aside>
+                            <div class="boardSmall" style="background-color: #60b5b2">
+                                <!-- Row 1 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 0 6 this.winningPieces}}"></div>
+                                </div>
+                                <!-- Row 2 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 1 6 this.winningPieces}}"></div>
+                                </div>
+                                <!-- Row 3 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 2 6 this.winningPieces}}"></div>
+                                </div>
+                                <!-- Row 4 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 3 6 this.winningPieces}}"></div>
+                                </div>
+                                <!-- Row 5 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 4 6 this.winningPieces}}"></div>
+                                </div>
+                                <!-- Row 6 --->
+                                <div class="rowSmall">
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 0 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 1 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 2 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 3 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 4 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 5 this.winningPieces}}"></div>
+                                    <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}; {{highlightPiece 5 6 this.winningPieces}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <p>Empty huh..? Go play some games!</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openGame(gameID) {
+        $.get('/view/', {gameID: gameID});
+    }
+</script>

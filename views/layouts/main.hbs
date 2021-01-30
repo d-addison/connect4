@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=0.7, initial-scale=1, maximum-scale=5">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="icon" href="/imgs/favicon.png">
+        <title>ConnecFTW</title>
+    </head>
+
+    <body>
+        <script src="../socket.io/socket.io.js"></script>
+        <nav>
+            <div>
+                <img class="logo" src="/imgs/logo.svg" alt="Website Logo" width="60px" onclick="viewGames('gamesMenu')">
+            </div>
+            <div class="headerTest">
+                <a id='logoName' href="/"><h4 id="nonBoldTitle">Connec</h4><h4>FTW</h4></a>
+            </div>
+            <div id="spacer"></div>
+            <ul class="navLinks">
+                {{#if active.LoggedIn}}
+                    <li> <a href="/" id="{{#if active.Index}}active{{/if}}">Play</a> </li>
+                    <li> <a href="/chatroom/{{currentUserPlayer.chats.[0].[0]}}" id="{{#if active.Chat}}active{{/if}}">Chatroom</a> </li>
+                    <li> <a href="/friends" id="{{#if active.Friends}}active{{/if}}">Friends</a></li>
+                    <li> <a href="/account" id="{{#if active.Account}}active{{/if}}">Account</a></li>
+                    <li> <a href="/logout" onclick="logout()">Logout</a></li>
+                {{else}}<li> <a href="/login" id="{{#if active.Login}}active{{/if}}">Login</a></li>{{/if}}
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+
+        <div id="gamesMenu">
+            <div class="gameSliderParent">
+                <div class="gameSliderChild">
+                {{#each myGames}}
+                    <div class="hoverableGame" id="{{this._id}}" style="background-color: {{isWinner ../currentUserPlayer.name this.whosTurn}}">
+                        <p style="font-size: 10px">{{whosTurnToPlay ../currentUserPlayer.name this.whosTurn}}<br>{{this._id}}</p>
+                        <div class="boardSmall">
+                            <!-- Row 1 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[0].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                            <!-- Row 2 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[1].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                            <!-- Row 3 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[2].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                            <!-- Row 4 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[3].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                            <!-- Row 5 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[4].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                            <!-- Row 6 --->
+                            <div class="rowSmall">
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[0] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[1] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[2] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[3] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[4] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[5] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                                <div class="cellSmall" style="background-color: {{whichColor this.player1 this.player2 ../currentUserPlayer.name this.board.[5].[6] ../currentUserPlayer.mColour ../currentUserPlayer.oColour}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+
+
+
+        {{{body}}}
+
+        <script src="/jquery-3.5.1.js"></script>
+        {{#each scripts}}
+            <script src="{{script}}"></script>
+        {{/each}}
+    </body>
+</html>
+
+<script>
+    function viewGames(menu) {
+        show(menu);
+
+        let currentGames = document.querySelectorAll(".hoverableGame");
+        for(let i = 0; i < currentGames.length; i++) {
+            $(currentGames[i]).click(function (e) {
+                e.preventDefault();
+                openGame(currentGames[i].getAttribute("id"));
+            });
+        }
+    }
+
+    function openGame(gameID) {
+        window.location.replace('http://localhost:9999/play/' + gameID);
+    }
+
+    function show(x){
+        let gMenu = document.getElementById(x);
+        if (gMenu.style.display === 'block' || gMenu.style.display === 'flex') {
+            gMenu.style.display = "none";
+        } else {
+            gMenu.style.display = "block";
+        }
+    }
+</script>

@@ -1,0 +1,73 @@
+<div id="accountParent" class="boxWrapperParent">
+    <div id="accountChild" class="boxWrapperChild">
+        <div id="profileInfo">
+            <img src="{{profilePic}}" alt="placeholderProfilePic" width="120px" height="120px" id="profilePic" class="pro">
+            <aside>
+                <p id="name" style="color: {{mColour}}; text-shadow: 0 0 3px black; float: left">{{username}}</p><br>
+                <div style="display: table">
+                    <p id="onlineStatus" style="color: {{colour}};text-shadow: 1px 1px black">{{status}}</p>
+                    <div class="dropdown" onclick="show('dropdown-content')">
+                        <span>
+                            <img id="dropdownPic" src="../imgs/logo.svg" alt="Website Logo" width="15x">
+                        </span>
+                        <div id="dropdown-content">
+                            <form action="/api/user/changeStatus" method="post" id="statusForm">
+                                <button type="submit" style="color: lightgreen; text-shadow: 1px 1px black" value="online" name="status">Online</button>
+                                <button type="submit" style="color: yellow; text-shadow: 1px 1px black" value="away" name="status">Away</button>
+                                <button type="submit" style="color: grey; text-shadow: 1px 1px black" value="offline" name="status">Offline</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <p style="float:left">W/L: {{divideAndRound currentUserPlayer.wins currentUserPlayer.losses}}</p>
+                <p style="float:left">Wins: {{currentUserPlayer.wins}}</p>
+                <p style="float:left">Losses: {{currentUserPlayer.losses}}</p>
+            </aside>
+        </div>
+        <div id="accountInfoParent">
+            <form class="accountInfo" action="/api/user/changeAccountInfo" method="post" id="accountInfoForm" style="border: 0.1rem solid grey; margin-bottom: 27px">
+                <br>
+                {{#if currentUserPlayer.isPasswordReset}}
+                    <label for="tempPassword">Temporary Password:</label><br>
+                    <input type="text" id="tempPassword" name="tempPassword" required><br>
+
+                    <label for="newPassword">New Password:</label><br>
+                    <input type="password" id="newPassword" name="newPassword" required><br>
+                {{/if}}
+                <label for="mColour">Your Colour</label><br>
+                <input type="color" id="mColour" name="mColour" value="{{currentUserPlayer.mColour}}"><br>
+
+                <label for="oColour">Opponents Colour</label><br>
+                <input type="color" id="oColour" name="oColour" value="{{currentUserPlayer.oColour}}"><br><br>
+
+                <select style="font-size:23px; width: 300px; height: 30px; text-align-last: center; text-align: center" name="profileType">
+                    <option selected disabled>Select a profile type:</option>
+                    <option name="profileType" value="public">Public Profile</option>
+                    <option name="profileType" value="private">Private Profile</option>
+                </select><br>
+
+                <label>Profile Picture</label><br>
+                <ul id="imageList">
+                    <li>
+                        <input type="radio" id="pic1" name="pic" value="/imgs/michael2.jpg">
+                        <label for="pic1"><img src="/imgs/michael2.jpg"></label>
+                    </li>
+                    <li> <input type="radio" id="pic2" name="pic" value="/imgs/squidward.png">
+                        <label for="pic2"><img src="/imgs/squidward.png"></label>
+                    </li>
+                    <li> <input type="radio" id="pic3" name="pic" value="/imgs/profilePic3.png">
+                        <label for="pic3"><img src="/imgs/profilePic3.png"></label>
+                    </li>
+                    <li> <input type="radio" id="pic4" name="pic" value="/imgs/vader.jpg">
+                        <label for="pic4"><img src="/imgs/vader.jpg"></label>
+                    </li>
+                    <li> <input type="radio" id="pic5" name="pic" value="/imgs/michael.png">
+                        <label for="pic5"><img src="/imgs/michael.png"></label>
+                    </li>
+                </ul>
+
+                <input type="submit" value="Save" style="">
+            </form>
+        </div>
+    </div>
+</div>
