@@ -503,12 +503,14 @@ will instantly log you in once you’ve created a valid account.
 You can pick whether or not to play a casual or ranked game. You can also enter a game ID
 to spectate or view it. You can also see a list of game invites from friends. If you get sent
 one, you MUST refresh the page (bad flaw I know).
+! [homeScreen] (pictures/search.png)
 
 ## /chatroom
 You can choose who you want to chat with. They must be in your friends list, and you must
 be part of the chat to join it. When you add someone as a friend, it will create a chat for you
 and them ONLY. If you have no friends and try and access the chatroom, it will bring you to
 the friends page.
+! [chat] (pictures/chat)
 
 ## /friends
 You can see your friends and the status of their account is the colour that surrounds the
@@ -516,6 +518,7 @@ profile picture and the box. Green is online, yellow is away, and grey is offlin
 search for users, send friend requests, remove friends, deny friend request and also accept
 them. You can also challenge a friend to a game, message them, or view their profile. If you
 get sent a friend request, you MUST refresh your page (bad flaw I know).
+! [friends] (pictures/friends)
 
 ## /friends/users/:user
 This page will show you any user that has the substring of your search in their own name. If
@@ -536,6 +539,7 @@ On this page you can see your online status, win loss ratio, wins, losses, and y
 games (ranked). You can also change your online status with the double arrow icon beside
 your online status. You can also change your profile settings by clicking the button. Each
 game is clickable.
+! [account] (pictures/account)
 
 ## /account/profileSettings
 You can change your colour, opponents colour, public or private profile, and your profile
@@ -554,6 +558,7 @@ finished, it will bring you to the view page. If you finish a game, you can refr
 bring it to the view page. On this page, you can forfeit, leave at any time and come back to it,
 and you can message the users who are currently viewing the game. When the game is
 over, you can hit the button to requeue, which brings you to the main page.
+! [play] (pictures/play)
 
 ## /view/:gameID
 You can use the slider to change the speed at which the game replays when you hit replay.
