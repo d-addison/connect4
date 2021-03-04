@@ -1,11 +1,11 @@
 ConnecFTW - A Connect 4 Website
-#This is my final submission for my COMP2406
+# This is my final submission for my COMP2406
 
-#**Table of Contents**
-#Functionality
+# **Table of Contents**
+# Functionality
   Implemented
   Not Implemented
-#**Extensions**
+# **Extensions**
   Database
   Password Reset
   Adaptive-ish Interface
