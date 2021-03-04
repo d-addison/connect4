@@ -484,7 +484,7 @@ an animation so I thought it was pretty cool to add it when the burger is clicke
 pretty solid and transitions quite well.
 
 ## **Page Summary & Functionality:**
-#Header:
+# Header:
 The double arrow symbol that points downwards can be clicked to view your past games.
 The ConnecFTW text brings you to the main page. Each page header can be clicked.
 
